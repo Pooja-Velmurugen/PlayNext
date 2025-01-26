@@ -45,14 +45,13 @@
             background: linear-gradient(135deg, #6236FF, #c222ba);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            
+            text-decoration: none;
         }
         .text1-gradient {
             background: linear-gradient(135deg, #51a1c1, #4e25c8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
         .image-section {
             flex: 1;
             text-align: left;
@@ -62,31 +61,65 @@
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
         }
+        .btn btn-info :hover{
+            color: aquamarine;                        
+        }
 
-        #home{
+        #home {
             margin-top: 2%;
             padding: 50px 0;
-            background-color:rgb(141, 219, 245);
+            background-color: rgb(141, 219, 245);
             background-repeat: no-repeat;
             background-size: cover;
-            
         }
+
+        /* Footer styles */
+        footer {
+            background-color: #120516;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #A56FFF;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .btn-custom {
+            background: linear-gradient(135deg, #6236FF, #c222ba);
+            color: white;
+            border: none;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn-custom:hover {
+            background: linear-gradient(135deg, #af1290 0%, #ff6ffa 100%);
+            transform: scale(1.05);
+        }
+
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <img src="img/musiclogo.png" alt="" width="50px" style="padding-right: 1%;">
-        <a class="navbar-brand" href="#" ><i style="text-decoration: line-through">Lone</i><i>Vibes</i></a>
+        <a class="navbar-brand" href="#"><i style="text-decoration: line-through">Lone</i><i>Vibes</i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto" >
-                <li class="nav-item"><a class="nav-link" href="#home" style="color: #120516;">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="search.html" style="color: #120516;">Search</a></li>
-                <li class="nav-item"><a class="nav-link" href="playlist.html" style="color: #120516;">Myplaylist </a></li>
-                <li class="nav-item"><a class="nav-link" href="favorites.html" style="color: #120516;">Favorite</a></li>
-                <li class="nav-item"><a class="nav-link" href="help.html" style="color: #120516;">Help</a></li>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html" style="color: #120516;">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="linkfiles/musictyp.html" style="color: #120516;">Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="linkfiles/playlist.html" style="color: #120516;">Myplaylist </a></li>
+                <li class="nav-item"><a class="nav-link" href="linkfiles/favorites.html" style="color: #120516;">Favorite</a></li>
+                <li class="nav-item"><a class="nav-link" href="linkfiles/help.html" style="color: #120516;">Help</a></li>
             </ul>
         </div>
     </nav>
@@ -96,12 +129,18 @@
             <img src="img/musicenjoy.png" alt="Music Listening">
         </div>
         <div class="text-section">
-            <h1 class="text-gradient">Welcome to LoneVibes❤️</h1>
+            <h1 class="text-gradient"><i>Welcome to </i><i style="text-decoration: line-through">Lone</i><i>Vibes</i>❤️</h1>
             <p class="text1-gradient">Experience the best music from all around the world with our LoneVibes player. Discover trending songs, create playlists, and enjoy seamless listening.</p>
-            <a href="search.html"><button class="btn btn-info">Explore Now</button></a>
+            <a href="linkfiles/musictyp.html"><button class="btn btn-custom">Explore Now</button></a>
         </div>
     </div>
     </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 LoneVibes. All rights reserved.</p>
+        <p>Made with ❤️ by <a href="#" target="_blank">Pooja V</a></p>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -112,17 +151,5 @@
             once: true, 
         });
     </script>
-     <script>
-        
-        $('#aboutLink').click(function(event) {
-            event.preventDefault();
-            $('html, body').animate({
-                scrollTop: $('#about').offset().top
-            }, 1000, function() {
-                $('#about').addClass('show-about');
-            });
-        });
-    </script>
-    
 </body>
 </html>

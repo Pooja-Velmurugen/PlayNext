@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Playlist</title>
+    <link rel="icon" href="img/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #30065b, #720d91)  ;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+            margin: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .text-gradient {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6236FF, #c222ba);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        #search {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ff75ea;
+            border-radius: 5px;
+            outline: none;
+        }
+        .music-item {
+            padding: 10px;
+            background: linear-gradient(135deg, #6236FF 0%, #A56FFF 100%);
+            color: white;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .music-item:hover {
+            background: linear-gradient(135deg, #af1290 0%, #ff6ffa 100%);
+            transform: scale(1.05);
+        }
+        #current-song-name
+        {
+            color:aliceblue;
+            font-size: large;
+            text-align: center;
+            font-weight: bold;
+            margin: 10px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .icon-btn:hover {
+            color: #ff75ea;
+        }
+        .btn-custom {
+            background: linear-gradient(135deg, #6236FF, #c222ba);
+            color: white;
+            border: none;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            margin-right: 10px;
+
+        }
+        .btn-custom:hover {
+            background: linear-gradient(135deg, #af1290 0%, #ff6ffa 100%);
+            transform: scale(1.05);
+        }
+        .icon-btn {
+        border: none;
+        background: none;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        }
+        .icon-btn {
+        border: none;
+        background: none;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    
+    .favorite-btn:hover {
+        color: red;
+        transform: scale(1.2);
+    }
+    .favorite-btn.active {
+        color: red;
+    }
+
+    .playlist-btn:hover {
+        color: green;
+        transform: scale(1.2);
+    }
+
+    
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-gradient" >Music Playlist</h1>
+        <input type="text" id="search" class="form-control" placeholder="Search for music..." onkeyup="searchMusic()">
+        <ul id="music-list" class="list-group mt-3">
+            <li class="music-item" onclick="playMusic('../melodySong/EnnoduNeeIrundhaal.mp3', this)">
+                <span class="song-name" >Ennodu Nee Irudhaal</span>
+                <span>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Ennodu Nee Irudhaal', '../melodySong/EnnoduNeeIrundhaal.mp3')"><i class="fas fa-heart">❤️</i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Ennodu Nee Irudhaal', '../melodySong/EnnoduNeeIrundhaal.mp3')"><i class="fas fa-plus">➕</i></button>
+                </span>
+            </li>
+            <li class="music-item" onclick="playMusic('../melodySong/Iravaga-Nee.mp3', this)">
+                <span class="song-name" >Iravaga Nee</span>
+                <span>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Iravaga nee nilavaaga naan', '../melodySong/Iravaga-Nee.mp3')"><i class="fas fa-heart">❤️</i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Iravaga nee nilavaaga naan', '../melodySong/Iravaga-Nee.mp3')"><i class="fas fa-plus">➕</i></button>
+                </span>
+            </li>
+            <li class="music-item" onclick="playMusic('../melodySong/Orasaadha.mp3', this)">
+                <span class="song-name" >Orasaadha</span>
+                <span>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Orasaadha', '../melodySong/Orasaadha.mp3')"><i class="fas fa-heart">❤️</i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Orasaadha', '../melodySong/Orasaadha.mp3')"><i class="fas fa-plus">➕</i></button>
+                </span>
+            </li>
+            <li class="music-item" onclick="playMusic('../melodySong/Nadaaniyan.mp3', this)">
+                <span class="song-name" >Nadaaniyan</span>
+                <span>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Nadaaniyan', '../melodySong/Nadaaniyan.mp3')"><i class="fas fa-heart">❤️</i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Nadaaniyan', '../melodySong/Nadaaniyan.mp3')"><i class="fas fa-plus">➕</i></button>
+                </span>
+            </li>
+            <li class="music-item" onclick="playMusic('../melodySong/Poo-Urave.mp3', this)">
+                <span class="song-name" >Poo Urave</span>
+                <span>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Poo Urave', '../melodySong/Poo-Urave.mp3')"><i class="fas fa-heart">❤️</i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Poo Urave', '../melodySong/Poo-Urave.mp3')"><i class="fas fa-plus">➕</i></button>
+                </span>
+            </li>
+            <li class="music-item" onclick="playMusic('../melodySong/Hawayein.mp3', this)">
+                <span class="song-name" >Hawayein</span>
+                <span>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Hawayein', '../melodySong/Hawayein.mp3')"><i class="fas fa-heart">❤️</i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Hawayein', '../melodySong/Hawayein.mp3')"><i class="fas fa-plus">➕</i></button>
+                </span>
+            </li>
+        </ul>
+        <div style="background: linear-gradient(135deg, #6236FF, #c222ba); border-radius: 10px;">
+            <audio id="player" controls style="width: 100%; margin-top: 20px;"></audio>
+            <div id="current-song-name"></div> 
+        </div> 
+        <div class="links">
+            <a href="favorites.html" class="btn btn-custom">Go to Favorites</a>
+            <a href="playlist.html" class="btn btn-custom">Go to My Playlist</a>
+        </div>
+    </div>
+
+    <script>
+        function searchMusic() {
+            let input = document.getElementById('search').value.toLowerCase();
+            let items = document.querySelectorAll('.music-item');
+            items.forEach(item => {
+                if (item.innerText.toLowerCase().includes(input)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function playMusic(song, element) {
+            let player = document.getElementById('player');
+            player.src = song;
+            player.play();
+            let songName = element.querySelector('.song-name').innerText;
+            player.title = songName;
+            document.getElementById('current-song-name').innerText = songName;
+        }
+
+
+        function addToFavorites(event, songName, songFile) {
+            event.stopPropagation();
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            if (!favorites.some(song => song.file === songFile)) {
+                favorites.push({ name: songName, file: songFile });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert(`${songName} added to favorites!`);
+            } else {
+                alert(`${songName} is already in favorites.`);
+            }
+        }
+
+        function addToPlaylist(event, songName, songFile) {
+            event.stopPropagation();
+            let playlist = JSON.parse(localStorage.getItem('playlist')) || [];
+            if (!playlist.some(song => song.file === songFile)) {
+                playlist.push({ name: songName, file: songFile });
+                localStorage.setItem('playlist', JSON.stringify(playlist));
+                alert(`${songName} added to playlist!`);
+            } else {
+                alert(`${songName} is already in playlist.`);
+            }
+        }
+    </script>
+</body>
+</html>
