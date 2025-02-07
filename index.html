@@ -8,15 +8,36 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Previous meta tags and links -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url(img/homebg.jpg);
-            background-size: cover;
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6236FF 0%, #A56FFF 100%);
+            --secondary-gradient: linear-gradient(135deg, #51a1c1, #4e25c8);
         }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url(img/homebg.jpg) no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 100px; /* Space for music player */
+        }
+        .text-gradient {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6236FF, #c222ba);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        .text1-gradient {
+            background: linear-gradient(135deg, #51a1c1, #4e25c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         .navbar {
             background: linear-gradient(135deg, #6236FF 0%, #A56FFF 100%);
             color:#120516 !important;
@@ -34,76 +55,174 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-        }
-        .text-section {
-            flex: 1;
-            padding: 40px;
-        }
-        .text-gradient {
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #6236FF, #c222ba);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-        }
-        .text1-gradient {
-            background: linear-gradient(135deg, #51a1c1, #4e25c8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .image-section {
-            flex: 1;
-            text-align: left;
-        }
-        .image-section img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
-        .btn btn-info :hover{
-            color: aquamarine;                        
+        } 
+        /* Glassmorphism effect for content */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
 
-        #home {
-            margin-top: 2%;
-            padding: 50px 0;
-            background-color: rgb(141, 219, 245);
-            background-repeat: no-repeat;
-            background-size: cover;
+        /* Music Player Styles */
+        #music-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(18, 5, 22, 0.95);
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
         }
 
-        /* Footer styles */
-        footer {
-            background-color: #120516;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 14px;
+        
+
+        .progress-container {
+            flex-grow: 1;
+            margin: 0 30px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            cursor: pointer;
         }
 
-        footer a {
-            color: #A56FFF;
-            text-decoration: none;
+        .progress-bar {
+            width: 30%;
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            transition: width 0.1s linear;
         }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
-        .btn-custom {
-            background: linear-gradient(135deg, #6236FF, #c222ba);
-            color: white;
+        .control-btn {
+            background: none;
             border: none;
-            font-size: 1.1rem;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .btn-custom:hover {
-            background: linear-gradient(135deg, #af1290 0%, #ff6ffa 100%);
-            transform: scale(1.05);
+            color: #fff;
+            font-size: 1.2em;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
+        .control-btn:hover {
+            color: #A56FFF;
+            transform: scale(1.1);
+        }
+
+        /* Enhanced Content Section */
+        .content {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .feature-card {
+            padding: 30px;
+            margin: 20px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Updated Button Styles */
+        .btn-custom {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .btn-custom:hover:before {
+            left: 100%;
+        }
+        footer {
+    background: rgba(18, 5, 22, 0.85);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+footer h5 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #A56FFF;
+}
+
+footer p {
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    margin: 0 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6236FF, #c222ba);
+    color: #fff;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, background 0.3s ease;
+    text-decoration: none;
+}
+
+.social-link:hover {
+    transform: scale(1.2);
+    background: linear-gradient(135deg, #c222ba, #6236FF);
+}
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .image-section {
+                margin-top: 30px;
+            }
+            
+            #music-player {
+                flex-direction: column;
+                padding: 15px;
+                text-align: center;
+            }
+            
+            .player-controls {
+                margin-top: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -123,25 +242,81 @@
             </ul>
         </div>
     </nav>
-    <section id="Home" class="text-center" data-aos="fade-up">
-    <div class="container content">
-        <div class="image-section">
-            <img src="img/musicenjoy.png" alt="Music Listening">
+    <!-- Keep existing navbar -->
+
+    <section id="hero" class="text-center py-5">
+        <div class="container glass-container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 text-gradient mb-4">Your Personal<br>Sound Sanctuary</h1>
+                    <p class="lead text1-gradient mb-4">Immerse yourself in crystal-clear audio experiences tailored just for you.</p>
+                    <a href="linkfiles/musictyp.html" class="btn btn-custom">Start Listening</a>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <img src="img/musicenjoy.png" alt="Music Visualizer" class="img-fluid rotating-record">
+                </div>
+            </div>
         </div>
-        <div class="text-section">
-            <h1 class="text-gradient"><i>Welcome to </i><i style="text-decoration: line-through">Lone</i><i>Vibes</i>❤️</h1>
-            <p class="text1-gradient">Experience the best music from all around the world with our LoneVibes player. Discover trending songs, create playlists, and enjoy seamless listening.</p>
-            <a href="linkfiles/musictyp.html"><button class="btn btn-custom">Explore Now</button></a>
-        </div>
-    </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 LoneVibes. All rights reserved.</p>
-        <p>Made with ❤️ by <a href="#" target="_blank">Pooja V</a></p>
-    </footer>
+    
 
+    <!-- Add Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-4" onclick="window.location.href='linkfiles/favorites.html';">
+                    <div class="glass-container feature-card">
+                        <i class="fas fa-music fa-3x text-gradient"></i>
+                        <h4 class="display-3 text-gradient mb-3">My Favorites</h4>
+                        <p class="lead text1-gradient mb-2" >Save and enjoy your most-loved songs in one place.</p>
+                    </div>
+                </div>
+               
+                
+                <div class="col-md-4" onclick="window.location.href='linkfiles/playlist.html';">
+                    <div class="glass-container feature-card">
+                        <i class="fas fa-music fa-3x text-gradient"></i>
+                        <h4 class="display-3 text-gradient mb-3">My Playlist</h4>
+                        <p class="lead text1-gradient mb-2" >Create and customize playlists for any mood or occasion and don't forget to enjoy it</p>
+                    </div>
+                </div>
+               
+                
+                <div class="col-md-4">
+                    <div class="glass-container feature-card">
+                        <i class="fas fa-music fa-3x text-gradient"></i>
+                        <h4 class="display-3 text-gradient mb-3">Connect Us</h4>
+                        <p>
+                            <p class="lead text1-gradient mb-2" >Reach out to us for support, feedback, or collaboration.</p>
+                            <a href="linkfiles/help.html" class="btn btn-custom">any queries</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Add more feature cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated Footer -->
+    <footer class="glass-container mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="display-3 text-gradient mb-3">About LoneVibes</h5>
+                    <p class="lead text1-gradient mb-2">Tune in to your emotions with curated playlists and an intuitive music experience.</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="https://github.com/Pooja-Velmurugen" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/pooja-v-3845772b9" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:Lonevibeszzz@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                
+                </div>
+            </div>
+        </div>
+    </footer>
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -149,6 +324,18 @@
         AOS.init({
             duration: 1000, 
             once: true, 
+        });
+    </script>
+    <script>
+        // Add basic music player functionality
+        const playBtn = document.querySelector('.play-btn');
+        let isPlaying = false;
+
+        playBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playBtn.innerHTML = isPlaying ? 
+                '<i class="fas fa-pause"></i>' : 
+                '<i class="fas fa-play"></i>';
         });
     </script>
 </body>

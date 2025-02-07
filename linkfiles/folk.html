@@ -1,232 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Playlist</title>
-    <link rel="icon" href="img/icon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #30065b, #720d91);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden; 
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            animation: fadeIn 1.5s ease-in-out;
-            margin: 20px;
-            overflow-x: hidden; 
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .text-gradient {
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #6236FF, #c222ba);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        #search {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ff75ea;
-            border-radius: 5px;
-            outline: none;
-        }
-        .music-item {
-            padding: 10px;
-            background: linear-gradient(135deg, #6236FF 0%, #A56FFF 100%);
-            color: white;
-            margin: 5px 0;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .music-item:hover {
-            background: linear-gradient(135deg, #af1290 0%, #ff6ffa 100%);
-            transform: scale(1.05);
-        }
-        .icon-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        .icon-btn:hover {
-            color: #ff75ea;
-        }
-        .btn-custom {
-            background: linear-gradient(135deg, #6236FF, #c222ba);
-            color: white;
-            border: none;
-            font-size: 1.1rem;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            margin-right: 10px;
-        }
-        .btn-custom:hover {
-            background: linear-gradient(135deg, #af1290 0%, #ff6ffa 100%);
-            transform: scale(1.05);
-        }
-        .icon-btn {
-        border: none;
-        background: none;
-        font-size: 24px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    
-    .favorite-btn:hover {
-        color: red;
-        transform: scale(1.2);
-    }
-    .favorite-btn.active {
-        color: red;
-    }
-
-    .playlist-btn:hover {
-        color: green;
-        transform: scale(1.2);
-    }
-    #current-song-name
-    {
-        color:aliceblue;
-        font-size: large;
-        text-align: center;
-        font-weight: bold;
-        margin: 10px;
-    }
-</style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Music Streaming Platform</title>
+        <link rel="icon" href="img/icon.png">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            
+            body {
+                font-family: 'Poppins', sans-serif;
+                background: linear-gradient(135deg, #30065b, #720d91);
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow-x: hidden;
+                color: white;
+            }
+            .container {
+                background: rgba(255, 255, 255, 0.1);
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                animation: fadeIn 1.5s ease-in-out;
+                margin: 20px;
+                width: 90%;
+                max-width: 1200px;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .text-gradient {
+                font-size: 2.5rem;
+                font-weight: bold;
+                background: linear-gradient(135deg, #6236FF, #c222ba);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            #search {
+                width: 100%;
+                padding: 10px;
+                border: 2px solid #ff75ea;
+                border-radius: 5px;
+                outline: none;
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+            }
+            .music-item {
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                margin: 10px 0;
+                border-radius: 10px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .music-item.playing {
+                background: rgba(255, 255, 255, 0.2);
+                border-left: 5px solid #ff75ea;
+            }
+            .music-item:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(1.02);
+            }
+            .icon-btn {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            .icon-btn:hover {
+                color: #ff75ea;
+            }
+            .btn-custom {
+                background: linear-gradient(135deg, #6236FF, #c222ba);
+                color: white;
+                border: none;
+                font-size: 1.1rem;
+                padding: 10px 20px;
+                border-radius: 5px;
+                margin-top: 20px;
+                margin-right: 10px;
+                transition: all 0.3s ease;
+            }
+            .btn-custom:hover {
+                background: linear-gradient(135deg, #af1290 0%, #ff6ffa 100%);
+                transform: scale(1.05);
+            }
+            .favorite-btn:hover {
+                color: red;
+                transform: scale(1.2);
+            }
+            .favorite-btn.active {
+                color: red;
+            }
+            .playlist-btn:hover {
+                color: green;
+                transform: scale(1.2);
+            }
+            #current-song-name {
+                color: white;
+                font-size: 1.2rem;
+                text-align: center;
+                font-weight: bold;
+                margin: 10px;
+            }
+            .player-container {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                padding: 20px;
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            .player-container audio {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .player-controls {
+                display: flex;
+                gap: 10px;
+                margin-top: 10px;
+            }
+            .player-controls button {
+                background: rgba(255, 255, 255, 0.1);
+                border: none;
+                color: white;
+                font-size: 1.2rem;
+                padding: 10px;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            .player-controls button:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(1.1);
+            }
+            .links {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            .navbar {
+                width: 100%;
+                background: rgba(255, 255, 255, 0.1);
+                padding: 10px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+            .navbar .logo {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: white;
+            }
+            .navbar .nav-links a {
+                color: white;
+                text-decoration: none;
+                margin-left: 20px;
+                font-size: 1rem;
+            }
+            .navbar .nav-links a:hover {
+                color: #ff75ea;
+            }
+            
+            .inline-player {
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 10px;
+                width: 100%;
+            }
+        </style>
+    </head>
 <body>
+    <div class="navbar">
+        <div class="logo">Folk-Musics</div>
+        <div class="nav-links">
+            <a href="favorites.html">Favorites</a>
+            <a href="playlist.html">Playlist</a>
+            <a href="../index.html">Home</a>
+        </div>
+    </div>
     <div class="container">
         <h1 class="text-gradient">Music Playlist</h1>
         <input type="text" id="search" class="form-control" placeholder="Search for music..." onkeyup="searchMusic()">
         <ul id="music-list" class="list-group mt-3">
-            <li class="music-item" onclick="playMusic('../folksong/TaubaTauba.mp3', this)">
+            <li class="music-item" id="music-item-1" onclick="playMusic('../folksong/TaubaTauba.mp3', this)">
                 <span class="song-name">Tauba Tauba</span>
                 <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Tauba Tauba', '../folksong/TaubaTauba.mp3')"><i class="fas fa-heart">❤️</i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Tauba Tauba', '../folksong/TaubaTauba.mp3')"><i class="fas fa-plus">➕</i></button>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Tauba Tauba', '../folksong/TaubaTauba.mp3')"><i class="fas fa-heart"></i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Tauba Tauba', '../folksong/TaubaTauba.mp3')"><i class="fas fa-plus"></i></button>
                 </span>
             </li>
-            <li class="music-item" onclick="playMusic('../folksong/pasoori.mp3', this)">
+            <li class="music-item" id="music-item-2" onclick="playMusic('../folksong/pasoori.mp3', this)">
                 <span class="song-name">Pasoori</span>
                 <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Pasoori', '../folksong/pasoori.mp3')"><i class="fas fa-heart">❤️</i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Pasoori', '../folksong/pasoori.mp3')"><i class="fas fa-plus">➕</i></button>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Pasoori', '../folksong/pasoori.mp3')"><i class="fas fa-heart"></i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Pasoori', '../folksong/pasoori.mp3')"><i class="fas fa-plus"></i></button>
                 </span>
             </li>
-            <li class="music-item" onclick="playMusic('../folksong/KatchiSera.mp3', this)">
+            <li class="music-item" id="music-item-3" onclick="playMusic('../folksong/KatchiSera.mp3', this)">
                 <span class="song-name">Katchi Sera</span>
                 <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Katchi Sera', '../folksong/KatchiSera.mps')"><i class="fas fa-heart">❤️</i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Katchi Sera', '../folksong/KatchiSera.mp3')"><i class="fas fa-plus">➕</i></button>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Katchi Sera', '../folksong/KatchiSera.mps')"><i class="fas fa-heart"></i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Katchi Sera', '../folksong/KatchiSera.mp3')"><i class="fas fa-plus"></i></button>
                 </span>
             </li>
-            <li class="music-item" onclick="playMusic('../folksong/Ethir-Neechal.mp3', this)">
+            <li class="music-item" id="music-item-4" onclick="playMusic('../folksong/Ethir-Neechal.mp3', this)">
                 <span class="song-name">Ethir-Neechal</span>
                 <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Ethir-Neechal', '../folksong/Ethir-Neechal.mp3')"><i class="fas fa-heart">❤️</i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Ethir-Neechal', '../folksong/Ethir-Neechal.mp3')"><i class="fas fa-plus">➕</i></button>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Ethir-Neechal', '../folksong/Ethir-Neechal.mp3')"><i class="fas fa-heart"></i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Ethir-Neechal', '../folksong/Ethir-Neechal.mp3')"><i class="fas fa-plus"></i></button>
                 </span>
             </li>
-            <li class="music-item" onclick="playMusic('../folksong/UdhungadaSangu.mp3', this)">
+            <li class="music-item" id="music-item-5" onclick="playMusic('../folksong/UdhungadaSangu.mp3', this)">
                 <span class="song-name">I'm Single And I'm Young</span>
                 <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Im Single And Im Young', '../folksong/UdhungadaSangu.mp3')"><i class="fas fa-heart">❤️</i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Im Single And Im Young', '../folksong/UdhungadaSangu.mp3')"><i class="fas fa-plus">➕</i></button>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Im Single And Im Young', '../folksong/UdhungadaSangu.mp3')"><i class="fas fa-heart"></i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Im Single And Im Young', '../folksong/UdhungadaSangu.mp3')"><i class="fas fa-plus"></i></button>
                 </span>
             </li>
-            <li class="music-item" onclick="playMusic('../folksong/ChammakChallo.mp3', this)">
+            <li class="music-item" id="music-item-6" onclick="playMusic('../folksong/ChammakChallo.mp3', this)">
                 <span class="song-name">Chammak Challo</span>
                 <span>
-                    <button class="icon-btn favorite-btn"onclick="addToFavorites(event, 'ChammakChallo.mp3', '../folksong/ChammakChallo.mp3')"><i class="fas fa-heart">❤️</i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'ChammakChallo.mp3', '../folksong/ChammakChallo.mp3')"><i class="fas fa-plus">➕</i></button>
+                    <button class="icon-btn favorite-btn"onclick="addToFavorites(event, 'ChammakChallo.mp3', '../folksong/ChammakChallo.mp3')"><i class="fas fa-heart"></i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'ChammakChallo.mp3', '../folksong/ChammakChallo.mp3')"><i class="fas fa-plus"></i></button>
                 </span>
             </li>
-            <li class="music-item" onclick="playMusic('../folksong/Water Packet.mp3', this)">
+            <li class="music-item" id="music-item-7" onclick="playMusic('../folksong/Water Packet.mp3', this)">
                 <span class="song-name">Water Packet</span>
                 <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Water Packet', '../folksong/Water Packet.mp3')"><i class="fas fa-heart">❤️</i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Water Packet', '../folksong/Water Packet.mp3')"><i class="fas fa-plus">➕</i></button>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Water Packet', '../folksong/Water Packet.mp3')"><i class="fas fa-heart"></i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Water Packet', '../folksong/Water Packet.mp3')"><i class="fas fa-plus"></i></button>
                 </span>
             </li>
-        </ul>
-        <div style="background: linear-gradient(135deg, #6236FF, #c222ba); border-radius: 10px;">
-            <audio id="player" controls style="width: 100%; margin-top: 20px;"></audio>
-            <div id="current-song-name"></div> 
-        </div>     
+            <li class="music-item" id="music-item-9" onclick="playMusic('../folksong/Why-this-kolaveri-di.mp3', this)">
+                <span class="song-name">Why this Kolaveri di</span>
+                <span>
+                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Why this Kolaveri di', '../folksong/Why-this-kolaveri-di.mp3')"><i class="fas fa-heart"></i></button>
+                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Why this Kolaveri di', '../folksong/Why-this-kolaveri-di.mp3')"><i class="fas fa-plus"></i></button>
+                </span>
+            </li>
+            
+        </ul>    
         <div class="links">
             <a href="favorites.html" class="btn btn-custom">Go to Favorites</a>
             <a href="playlist.html" class="btn btn-custom">Go to My Playlist</a>
         </div>
     </div>
 
+    <audio id="global-player"></audio>
+    
+
     <script>
-        function searchMusic() {
-            let input = document.getElementById('search').value.toLowerCase();
-            let items = document.querySelectorAll('.music-item');
-            items.forEach(item => {
-                if (item.innerText.toLowerCase().includes(input)) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
+        let currentPlayingItem = null;
+        let currentOriginalHTML = null;
+        const globalPlayer = new Audio();
+
+
+        function searchMusic() 
+        {
+        const input = document.getElementById('search').value.toLowerCase();
+        const items = document.getElementsByClassName('music-item');
+        
+        Array.from(items).forEach(item => {
+            const songName = item.querySelector('.song-name').innerText.toLowerCase();
+            item.style.display = songName.includes(input) ? 'flex' : 'none';
+        });
+        }
+
+        function playMusic(song, element, id) {
+            
+            event.stopPropagation();
+
+            
+            if (currentPlayingItem === element) {
+                togglePlayPause();
+                return;
+            }
+
+            
+            if (currentPlayingItem) {
+                currentPlayingItem.innerHTML = currentOriginalHTML;
+                currentPlayingItem.classList.remove('playing');
+            }
+
+            
+            currentOriginalHTML = element.innerHTML;
+            currentPlayingItem = element;
+
+        
+            const songName = element.querySelector('.song-name').innerText;
+            element.innerHTML = `
+                <div class="inline-player" onclick="event.stopPropagation()">
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%">
+                        <div style="font-weight: bold">${songName}</div>
+                        <div class="player-controls">
+                            <button class="icon-btn" onclick="skip(-10)">
+                                <i class="fas fa-backward"></i>
+                            </button>
+                            <button class="icon-btn" id="play-pause-btn">
+                                <i id="play-pause-icon" class="fas fa-pause"></i>
+                            </button>
+                            <button class="icon-btn" onclick="skip(10)">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <audio id="global-player" style="width: 100%; margin-top: 10px;"></audio>
+                </div>
+            `;
+
+         
+            const audioElement = element.querySelector('audio');
+            audioElement.src = song;
+            audioElement.play();
+
+            
+            const playPauseBtn = element.querySelector('#play-pause-btn');
+            playPauseBtn.addEventListener('click', togglePlayPause);
+            
+            audioElement.addEventListener('play', () => {
+                element.querySelector('#play-pause-icon').classList.replace('fa-play', 'fa-pause');
+            });
+
+            audioElement.addEventListener('pause', () => {
+                element.querySelector('#play-pause-icon').classList.replace('fa-pause', 'fa-play');
+            });
+
+            audioElement.addEventListener('ended', () => {
+                element.innerHTML = currentOriginalHTML;
+                currentPlayingItem = null;
             });
         }
 
-        function playMusic(song, element) {
-            let player = document.getElementById('player');
-            player.src = song;
-            player.play();
-            let songName = element.querySelector('.song-name').innerText;
-            player.title = songName;
-            document.getElementById('current-song-name').innerText = songName;
+        function togglePlayPause() {
+            const audioElement = currentPlayingItem.querySelector('audio');
+            if (audioElement.paused) {
+                audioElement.play();
+            } else {
+                audioElement.pause();
+            }
         }
 
+        function skip(seconds) {
+            const audioElement = currentPlayingItem.querySelector('audio');
+            audioElement.currentTime += seconds;
+        }
         function addToFavorites(event, songName, songFile) {
-            event.stopPropagation();
-            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-            if (!favorites.some(song => song.file === songFile)) {
-                favorites.push({ name: songName, file: songFile });
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-                alert(`${songName} added to favorites!`);
-            } else {
-                alert(`${songName} is already in favorites.`);
-            }
+        event.stopPropagation();
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        if (!favorites.some(song => song.file === songFile)) {
+            favorites.push({ name: songName, file: songFile });
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert(`${songName} added to favorites!`);
+        } else {
+            alert(`${songName} is already in favorites.`);
         }
+    }
 
-        function addToPlaylist(event, songName, songFile) {
-            event.stopPropagation();
-            let playlist = JSON.parse(localStorage.getItem('playlist')) || [];
-            if (!playlist.some(song => song.file === songFile)) {
-                playlist.push({ name: songName, file: songFile });
-                localStorage.setItem('playlist', JSON.stringify(playlist));
-                alert(`${songName} added to playlist!`);
-            } else {
-                alert(`${songName} is already in playlist.`);
-            }
+    function addToPlaylist(event, songName, songFile) {
+        event.stopPropagation();
+        let playlist = JSON.parse(localStorage.getItem('playlist')) || [];
+        if (!playlist.some(song => song.file === songFile)) {
+            playlist.push({ name: songName, file: songFile });
+            localStorage.setItem('playlist', JSON.stringify(playlist));
+            alert(`${songName} added to playlist!`);
+        } else {
+            alert(`${songName} is already in playlist.`);
         }
+    }
+
+   
+    globalPlayer.addEventListener('ended', () => {
+        if (currentPlayingItem) {
+            currentPlayingItem.classList.remove('playing');
+            currentPlayingItem = null;
+            currentPlayingId = null;
+        }
+        if (playPauseIcon) playPauseIcon.classList.replace('fa-pause', 'fa-play');
+    });
+
+        
     </script>
 </body>
 </html>
