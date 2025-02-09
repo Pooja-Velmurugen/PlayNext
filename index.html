@@ -39,15 +39,59 @@
         }
         .navbar {
             background: linear-gradient(135deg, #6236FF 0%, #A56FFF 100%);
-            color:#120516 !important;
+            padding: 0.8rem 1rem;
         }
 
-        .navbar-brand, .nav-link {
-            color:rgb(141, 219, 245); 
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        .navbar-collapse {
+            background: linear-gradient(135deg, #6236FF 0%, #A56FFF 100%);
+            margin-top: 0.5rem;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .nav-item {
+            margin: 0.5rem 0;
+            text-align: center;
+        }
+
+    
+        .nav-link {
+            color: #e6e6e6 !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
         }
 
         .nav-link:hover {
-            color:#f2eff3 !important; 
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff !important;
+            transform: translateX(5px);
+        }
+
+        @media (min-width: 992px) {
+
+        .navbar-collapse {
+            background: transparent;
+            margin-top: 0;
+            padding: 0;
+        }
+        
+        .nav-item {
+            margin: 0 0.5rem;
+        }
+        
+        .nav-link {
+            padding: 0.5rem 1rem;
+        }
         }
         .content {
             display: flex;
