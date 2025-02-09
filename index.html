@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- Previous meta tags and links -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -16,15 +15,15 @@
             --primary-gradient: linear-gradient(135deg, #6236FF 0%, #A56FFF 100%);
             --secondary-gradient: linear-gradient(135deg, #51a1c1, #4e25c8);
         }
-
         body {
             font-family: 'Poppins', sans-serif;
             background: url(img/homebg.jpg) no-repeat center center fixed;
             background-size: cover;
             position: relative;
             min-height: 100vh;
-            padding-bottom: 100px; /* Space for music player */
+            padding-bottom: 100px; 
         }
+
         .text-gradient {
             font-size: 2.5rem;
             font-weight: bold;
@@ -56,16 +55,13 @@
             justify-content: center;
             height: 100vh;
         } 
-        /* Glassmorphism effect for content */
         .glass-container {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        }
-
-        /* Music Player Styles */
+        } 
         #music-player {
             position: fixed;
             bottom: 0;
@@ -113,7 +109,6 @@
             transform: scale(1.1);
         }
 
-        /* Enhanced Content Section */
         .content {
             padding: 80px 20px;
             text-align: center;
@@ -130,7 +125,6 @@
             transform: translateY(-10px);
         }
 
-        /* Updated Button Styles */
         .btn-custom {
             background: var(--primary-gradient);
             border: none;
@@ -202,7 +196,6 @@ footer p {
     background: linear-gradient(135deg, #c222ba, #6236FF);
 }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .content {
                 flex-direction: column;
@@ -242,8 +235,6 @@ footer p {
             </ul>
         </div>
     </nav>
-    <!-- Keep existing navbar -->
-
     <section id="hero" class="text-center py-5">
         <div class="container glass-container py-5">
             <div class="row align-items-center">
@@ -258,10 +249,6 @@ footer p {
             </div>
         </div>
     </section>
-
-    
-
-    <!-- Add Features Section -->
     <section class="py-5">
         <div class="container">
             <div class="row">
@@ -271,9 +258,7 @@ footer p {
                         <h4 class="display-3 text-gradient mb-3">My Favorites</h4>
                         <p class="lead text1-gradient mb-2" >Save and enjoy your most-loved songs in one place.</p>
                     </div>
-                </div>
-               
-                
+                </div>        
                 <div class="col-md-4" onclick="window.location.href='linkfiles/playlist.html';">
                     <div class="glass-container feature-card">
                         <i class="fas fa-music fa-3x text-gradient"></i>
@@ -281,8 +266,6 @@ footer p {
                         <p class="lead text1-gradient mb-2" >Create and customize playlists for any mood or occasion and don't forget to enjoy it</p>
                     </div>
                 </div>
-               
-                
                 <div class="col-md-4">
                     <div class="glass-container feature-card">
                         <i class="fas fa-music fa-3x text-gradient"></i>
@@ -292,14 +275,10 @@ footer p {
                             <a href="linkfiles/help.html" class="btn btn-custom">any queries</a>
                         </p>
                     </div>
-                </div>
-                
-                <!-- Add more feature cards -->
+                </div>  
             </div>
         </div>
     </section>
-
-    <!-- Updated Footer -->
     <footer class="glass-container mt-5">
         <div class="container">
             <div class="row">
@@ -327,7 +306,6 @@ footer p {
         });
     </script>
     <script>
-        // Add basic music player functionality
         const playBtn = document.querySelector('.play-btn');
         let isPlaying = false;
 
