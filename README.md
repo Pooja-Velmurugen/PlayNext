@@ -17,7 +17,7 @@ Users can search for songs using a search bar.
 
 ### Add to Playlist:
 <li>Create a custom playlist.</li>
-<li>Checks for duplicates before adding.</li>
+<li>Prevents duplicate entries.</li>
 
 ### Responsive Design:
 Fully responsive design using Bootstrap.
@@ -37,7 +37,6 @@ Links to the Favorites and Playlist pages.
 
 <li>Implement a backend for persistent data storage.</li>
 <li>Add user authentication for personalized playlists.</li>
-<li>Add songs with categories (e.g., Melody, Folk, etc.) for better organization.</li>
 <li>Enable video visibility to allow users to watch music videos along with audio playback.</li>
 <li>Improve UI/UX with additional animations.</li>
 
