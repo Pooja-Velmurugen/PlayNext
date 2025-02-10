@@ -1,477 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Music Streaming Platform</title>
-        <link rel="icon" href="img/icon.png">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <style>
-            
-            body {
-                font-family: 'Poppins', sans-serif;
-                background: linear-gradient(135deg, #30065b, #720d91);
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                overflow-x: hidden;
-                color: white;
-            }
-            .container {
-                background: rgba(255, 255, 255, 0.1);
-                padding: 30px;
-                border-radius: 15px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                text-align: center;
-                animation: fadeIn 1.5s ease-in-out;
-                margin: 20px;
-                width: 90%;
-                max-width: 1200px;
-            }
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(-20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            .text-gradient {
-                font-size: 2.5rem;
-                font-weight: bold;
-                background: linear-gradient(135deg, #6236FF, #c222ba);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-            #search {
-                width: 100%;
-                padding: 10px;
-                border: 2px solid #ff75ea;
-                border-radius: 5px;
-                outline: none;
-                background: rgba(255, 255, 255, 0.1);
-                color: white;
-            }
-            .music-item {
-                padding: 15px;
-                background: rgba(255, 255, 255, 0.1);
-                color: white;
-                margin: 10px 0;
-                border-radius: 10px;
-                transition: all 0.3s ease;
-                cursor: pointer;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .music-item.playing {
-                background: rgba(255, 255, 255, 0.2);
-                border-left: 5px solid #ff75ea;
-            }
-            .music-item:hover {
-                background: rgba(255, 255, 255, 0.2);
-                transform: scale(1.02);
-            }
-            .icon-btn {
-                background: none;
-                border: none;
-                color: white;
-                font-size: 1.5rem;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-            .icon-btn:hover {
-                color: #ff75ea;
-            }
-            .btn-custom {
-                background: linear-gradient(135deg, #6236FF, #c222ba);
-                color: white;
-                border: none;
-                font-size: 1.1rem;
-                padding: 10px 20px;
-                border-radius: 5px;
-                margin-top: 20px;
-                margin-right: 10px;
-                transition: all 0.3s ease;
-            }
-            .btn-custom:hover {
-                background: linear-gradient(135deg, #af1290 0%, #ff6ffa 100%);
-                transform: scale(1.05);
-            }
-            .favorite-btn:hover {
-                color: red;
-                transform: scale(1.2);
-            }
-            .favorite-btn.active {
-                color: red;
-            }
-            .playlist-btn:hover {
-                color: green;
-                transform: scale(1.2);
-            }
-            #current-song-name {
-                color: white;
-                font-size: 1.2rem;
-                text-align: center;
-                font-weight: bold;
-                margin: 10px;
-            }
-            .player-container {
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 10px;
-                padding: 20px;
-                margin-top: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-            }
-            .player-container audio {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-            .player-controls {
-                display: flex;
-                gap: 10px;
-                margin-top: 10px;
-            }
-            .player-controls button {
-                background: rgba(255, 255, 255, 0.1);
-                border: none;
-                color: white;
-                font-size: 1.2rem;
-                padding: 10px;
-                border-radius: 50%;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-            .player-controls button:hover {
-                background: rgba(255, 255, 255, 0.2);
-                transform: scale(1.1);
-            }
-            .links {
-                display: flex;
-                justify-content: center;
-                gap: 10px;
-                margin-top: 20px;
-            }
-            .navbar {
-                width: 100%;
-                background: rgba(255, 255, 255, 0.1);
-                padding: 10px 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                border-radius: 10px;
-                margin-bottom: 20px;
-            }
-            .navbar .logo {
-                font-size: 1.5rem;
-                font-weight: bold;
-                color: white;
-            }
-            .navbar .nav-links a {
-                color: white;
-                text-decoration: none;
-                margin-left: 20px;
-                font-size: 1rem;
-            }
-            .navbar .nav-links a:hover {
-                color: #ff75ea;
-            }
-            
-            .inline-player {
-                padding: 15px;
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 10px;
-                width: 100%;
-            }
-        </style>
-    </head>
-<body>
-    <div class="navbar">
-        <div class="logo">Pop-Music</div>
-        <div class="nav-links">
-            <a href="favorites.html">Favorites</a>
-            <a href="playlist.html">Playlist</a>
-            <a href="../index.html">Profile</a>
-        </div>
-    </div>
-    <div class="container">
-        <h1 class="text-gradient">Music Playlist</h1>
-        <input type="text" id="search" class="form-control" placeholder="Search for music..." onkeyup="searchMusic()">
-        <ul id="music-list" class="list-group mt-3">
-            <li class="music-item" id="music-item-1" onclick="playMusic('../song/ShapeOfYou.mp3', this)">
-                <span class="song-name">Shape of You - Ed Sheeran</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Shape of You - Ed Sheeran', '../song/ShapeOfYou.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Shape of You - Ed Sheeran', '../song/ShapeOfYou.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item"  id="music-item-2" onclick="playMusic('../song/StereoHearts.mp3', this)">
-                <span class="song-name">Stereo Hearts - Gym Class Heroes</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Stereo Hearts - Gym Class Heroes', '../song/StereoHearts.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Stereo Hearts - Gym Class Heroes', '../song/StereoHearts.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-3"  onclick="playMusic('../song/Levitating.mp4', this)">
-                <span class="song-name">Levitating - Dua Lipa</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Levitating - Dua Lipa', '../song/Levitating.mp4')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Levitating - Dua Lipa', '../song/Levitating.mp4')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-4" onclick="playMusic('../song/CheapTrills.mp3', this)">
-                <span class="song-name">Cheap Trills - Sia</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Cheap Trills - Sia', '../song/CheapTrills.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Cheap Trills - Sia', '../song/CheapTrills.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-5" onclick="playMusic('../song/infinity.mp3', this)">
-                <span class="song-name">Infinity - Jaymes Young</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Infinity - Jaymes Young', '../song/infinity.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Infinity - Jaymes Young', '../song/infinity.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-6" onclick="playMusic('../song/ScarsToYourBeautiful.mp3', this)">
-                <span class="song-name">Scars To Your Beautiful - Alessia Cara</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Scars To Your Beautiful - Alessia Cara', '../song/ScarsToYourBeautiful.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Scars To Your Beautiful - Alessia Cara', '../song/ScarsToYourBeautiful.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-7"  onclick="playMusic('../popsongs/JungKookSeven.mp3', this)">
-                <span class="song-name">Seven - JungKook</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Seven - JungKook', '../popsongs/JungKookSeven.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Seven - JungKook', '../popsongs/JungKookSeven.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-8" onclick="playMusic('../popsongs/Apt.mp3', this)">
-                <span class="song-name">APT - ROSÉ & Bruno Mars</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'APT - ROSÉ & Bruno Mars', '../popsongs/popsongs/Apt.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'APT - ROSÉ & Bruno Mars', '../popsongs/popsongs/Apt.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-9" onclick="playMusic('../popsongs/BTS BUTTER.mp3', this)">
-                <span class="song-name">BUTTER - BTS</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'BUTTER - BTS', '../popsongs/BTS BUTTER.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'BUTTER - BTS', '../popsongs/BTS BUTTER.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-10" onclick="playMusic('../popsongs/BTS BOY IN LUV.mp3', this)">
-                <span class="song-name">BTS BOY IN LUV - BTS</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'BTS BOY IN LUV - BTS', '../popsongs/BTS BOY IN LUV.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'BTS BOY IN LUV - BTS', '../popsongs/BTS BOY IN LUV.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-11"onclick="playMusic('../popsongs/BTS FAKE LOVE.mp3', this)">
-                <span class="song-name">BTS fake love - BTS</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'BTS fake love - BTS', '../popsongs/BTS FAKE LOVE.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'BTS fake love - BTS', '../popsongs/BTS FAKE LOVE.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-12" onclick="playMusic('../popsongs/BTS IDOL.mp3', this)">
-                <span class="song-name">BTS IDOL - BTS</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'BTS IDOL - BTS', '../popsongs/BTS IDOL.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'BTS IDOL - BTS', '../popsongs/BTS IDOL.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-13" onclick="playMusic('../popsongs/Perfect-(Mr-Jat.in).mp3', this)">
-                <span class="song-name">Prefect - Ed Sheeran</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Prefect - Ed Sheeran', '../popsongs/Perfect-(Mr-Jat.in).mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Prefect - Ed Sheeran', '../popsongs/Perfect-(Mr-Jat.in).mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-14" onclick="playMusic('../popsongs/ImSoLonely.mp3', this)">
-                <span class="song-name">I'm So Lonely - Broken Angel(Arash)</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Im So Lonely - Broken Angel(Arash)', '../popsongs/ImSoLonely.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Im So Lonely - Broken Angel(Arash)', '../popsongs/ImSoLonely.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-15" onclick="playMusic('../popsongs/LoveIsGone.mp3', this)">
-                <span class="song-name">BTS Love Is Gone - BTS</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'BTS Love Is Gone - BTS', '../popsongs/LoveIsGone.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'BTS Love Is Gone - BTs', '../popsongs/LoveIsGone.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-16" onclick="playMusic('../popsongs/The Kid LAROI Justin Bieber STAY.mp3', this)">
-                <span class="song-name">Stay - justin bieber</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Stay - justin bieber', '../popsongs/The Kid LAROI Justin Bieber STAY.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Stay - justin bieber', '../popsongs/The Kid LAROI Justin Bieber STAY.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-17" onclick="playMusic('../popsongs/Wecantbefriends.mp3', this)">
-                <span class="song-name">We Cant be frnds</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'BTS Love Is Gone - BTS', '../popsongs/Wecantbefriends.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'BTS Love Is Gone - BTs', '../popsongs/Wecantbefriends.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-            <li class="music-item" id="music-item-17" onclick="playMusic('../popsongs/DiewithaSmile.mp3', this)">
-                <span class="song-name">Die WIth A Smile</span>
-                <span>
-                    <button class="icon-btn favorite-btn" onclick="addToFavorites(event, 'Die WIth A Smile', '../popsongs/DiewithaSmile.mp3')"><i class="fas fa-heart"></i></button>
-                    <button class="icon-btn playlist-btn" onclick="addToPlaylist(event, 'Die WIth A Smile', '../popsongs/DiewithaSmile.mp3')"><i class="fas fa-plus"></i></button>
-                </span>
-            </li>
-        </ul>
-           
-        <div class="links">
-            <a href="favorites.html" class="btn btn-custom">Go to Favorites</a>
-            <a href="playlist.html" class="btn btn-custom">Go to My Playlist</a>
-        </div>
-    </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Streaming Platform</title>
+  <link rel="icon" href="img/icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #30065b, #720d91);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      color: white;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+      margin: 20px;
+      width: 90%;
+      max-width: 1200px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .text-gradient {
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #6236FF, #c222ba);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .music-item {
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      margin: 10px 0;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .music-item.playing {
+      background: rgba(255, 255, 255, 0.2);
+      border-left: 5px solid #ff75ea;
+    }
+    .music-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.02);
+    }
+    .icon-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .icon-btn:hover {
+      color: #ff75ea;
+    }
+    .btn-custom {
+      background: linear-gradient(135deg, #6236FF, #c222ba);
+      color: white;
+      border: none;
+      font-size: 1.1rem;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+      margin-right: 10px;
+      transition: all 0.3s ease;
+    }
+    .btn-custom:hover {
+      background: linear-gradient(135deg, #af1290 0%, #ff6ffa 100%);
+      transform: scale(1.05);
+    }
+    /* Inline player styles */
+    .inline-player {
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      width: 100%;
+    }
+    .player-controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .player-controls button {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      padding: 10px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .player-controls button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body onload="loadMyPlaylist()">
+  <div class="container">
+    <h1 class="text-gradient">My Playlist</h1>
+    <ul id="my-list" class="list-group"></ul>
+    <p id="no-my-list" style="display: none; text-align: center; color: #720d91;">
+      Your playlist is currently empty. Add your favorite songs!
+    </p>
+    <a href="musictyp.html" class="btn btn-custom">Back to Music List</a>
+  </div>
+  
+  <script>
+    let currentPlayingItem = null;
+    let currentOriginalHTML = null;
 
-    <audio id="global-player"></audio>
-    
+    function loadMyPlaylist() {
+      const playlist = JSON.parse(localStorage.getItem('playlist')) || [];
+      const playlistList = document.getElementById('my-list');
+      const noPlaylistMsg = document.getElementById('no-my-list');
 
-    <script>
-        let currentPlayingItem = null;
-        let currentOriginalHTML = null;
-        const globalPlayer = new Audio();
+      playlistList.innerHTML = '';
 
-
-        function searchMusic() 
-        {
-        const input = document.getElementById('search').value.toLowerCase();
-        const items = document.getElementsByClassName('music-item');
-        
-        Array.from(items).forEach(item => {
-            const songName = item.querySelector('.song-name').innerText.toLowerCase();
-            item.style.display = songName.includes(input) ? 'flex' : 'none';
+      if (playlist.length === 0) {
+        noPlaylistMsg.style.display = 'block';
+      } else {
+        noPlaylistMsg.style.display = 'none';
+        playlist.forEach((song, index) => {
+          const li = document.createElement('li');
+          li.className = 'music-item';
+          li.innerHTML = `
+            <span style="flex: 1; cursor: pointer;" onclick="playSong(${index}, event)">
+              ${song.name}
+            </span>
+            <button class="remove-btn" onclick="removeFromPlaylist(${index}, event)">🗑️</button>
+          `;
+          playlistList.appendChild(li);
         });
-        }
-
-        function playMusic(song, element, id) {
-            
-            event.stopPropagation();
-
-            
-            if (currentPlayingItem === element) {
-                togglePlayPause();
-                return;
-            }
-
-            
-            if (currentPlayingItem) {
-                currentPlayingItem.innerHTML = currentOriginalHTML;
-                currentPlayingItem.classList.remove('playing');
-            }
-
-            
-            currentOriginalHTML = element.innerHTML;
-            currentPlayingItem = element;
-
-        
-            const songName = element.querySelector('.song-name').innerText;
-            element.innerHTML = `
-                <div class="inline-player" onclick="event.stopPropagation()">
-                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%">
-                        <div style="font-weight: bold">${songName}</div>
-                        <div class="player-controls">
-                            <button class="icon-btn" onclick="skip(-10)">
-                                <i class="fas fa-backward"></i>
-                            </button>
-                            <button class="icon-btn" id="play-pause-btn">
-                                <i id="play-pause-icon" class="fas fa-pause"></i>
-                            </button>
-                            <button class="icon-btn" onclick="skip(10)">
-                                <i class="fas fa-forward"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <audio id="global-player" style="width: 100%; margin-top: 10px;"></audio>
-                </div>
-            `;
-
-         
-            const audioElement = element.querySelector('audio');
-            audioElement.src = song;
-            audioElement.play();
-
-            
-            const playPauseBtn = element.querySelector('#play-pause-btn');
-            playPauseBtn.addEventListener('click', togglePlayPause);
-            
-            audioElement.addEventListener('play', () => {
-                element.querySelector('#play-pause-icon').classList.replace('fa-play', 'fa-pause');
-            });
-
-            audioElement.addEventListener('pause', () => {
-                element.querySelector('#play-pause-icon').classList.replace('fa-pause', 'fa-play');
-            });
-
-            audioElement.addEventListener('ended', () => {
-                element.innerHTML = currentOriginalHTML;
-                currentPlayingItem = null;
-            });
-        }
-
-        function togglePlayPause() {
-            const audioElement = currentPlayingItem.querySelector('audio');
-            if (audioElement.paused) {
-                audioElement.play();
-            } else {
-                audioElement.pause();
-            }
-        }
-
-        function skip(seconds) {
-            const audioElement = currentPlayingItem.querySelector('audio');
-            audioElement.currentTime += seconds;
-        }
-        function addToFavorites(event, songName, songFile) {
-        event.stopPropagation();
-        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        if (!favorites.some(song => song.file === songFile)) {
-            favorites.push({ name: songName, file: songFile });
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-            alert(`${songName} added to favorites!`);
-        } else {
-            alert(`${songName} is already in favorites.`);
-        }
+      }
     }
 
-    function addToPlaylist(event, songName, songFile) {
-        event.stopPropagation();
-        let playlist = JSON.parse(localStorage.getItem('playlist')) || [];
-        if (!playlist.some(song => song.file === songFile)) {
-            playlist.push({ name: songName, file: songFile });
-            localStorage.setItem('playlist', JSON.stringify(playlist));
-            alert(`${songName} added to playlist!`);
-        } else {
-            alert(`${songName} is already in playlist.`);
-        }
+    function playSong(index, event) {
+      const playlist = JSON.parse(localStorage.getItem('playlist')) || [];
+      if (!playlist[index]) return;
+
+     
+      const li = event.target.closest('.music-item');
+
+     
+      if (currentPlayingItem === li) {
+        togglePlayPause();
+        return;
+      }
+
+      
+      if (currentPlayingItem) {
+        currentPlayingItem.innerHTML = currentOriginalHTML;
+        currentPlayingItem.classList.remove('playing');
+      }
+
+      
+      currentOriginalHTML = li.innerHTML;
+      currentPlayingItem = li;
+
+      
+      const songName = playlist[index].name;
+
+      
+      li.innerHTML = `
+        <div class="inline-player" onclick="event.stopPropagation()">
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%">
+            <div style="font-weight: bold">${songName}</div>
+            <div class="player-controls">
+              <button class="icon-btn" onclick="skip(-10, event)">
+                <i class="fas fa-backward"></i>
+              </button>
+              <button class="icon-btn" id="play-pause-btn" onclick="togglePlayPause(event)">
+                <i id="play-pause-icon" class="fas fa-pause"></i>
+              </button>
+              <button class="icon-btn" onclick="skip(10, event)">
+                <i class="fas fa-forward"></i>
+              </button>
+            </div>
+          </div>
+          <audio style="width: 100%; margin-top: 10px;"></audio>
+        </div>
+      `;
+
+      
+      const audioElement = li.querySelector('audio');
+      audioElement.src = playlist[index].file;
+      audioElement.play();
+
+      
+      audioElement.addEventListener('play', () => {
+        li.querySelector('#play-pause-icon').classList.replace('fa-play', 'fa-pause');
+      });
+      audioElement.addEventListener('pause', () => {
+        li.querySelector('#play-pause-icon').classList.replace('fa-pause', 'fa-play');
+      });
+      audioElement.addEventListener('ended', () => {
+        li.innerHTML = currentOriginalHTML;
+        currentPlayingItem = null;
+      });
     }
 
-   
-    globalPlayer.addEventListener('ended', () => {
-        if (currentPlayingItem) {
-            currentPlayingItem.classList.remove('playing');
-            currentPlayingItem = null;
-            currentPlayingId = null;
-        }
-        if (playPauseIcon) playPauseIcon.classList.replace('fa-pause', 'fa-play');
-    });
+    function togglePlayPause(event) {
+      if(event) event.stopPropagation();
+      const audioElement = currentPlayingItem.querySelector('audio');
+      if (audioElement.paused) {
+        audioElement.play();
+      } else {
+        audioElement.pause();
+      }
+    }
 
-        
-    </script>
+    function skip(seconds, event) {
+      if(event) event.stopPropagation();
+      const audioElement = currentPlayingItem.querySelector('audio');
+      audioElement.currentTime += seconds;
+    }
+
+    function removeFromPlaylist(index, event) {
+      event.stopPropagation();
+      const playlist = JSON.parse(localStorage.getItem('playlist')) || [];
+      if (currentPlayingItem && playlist[index].file === currentPlayingItem.querySelector('audio')?.src) {
+        const audioElement = currentPlayingItem.querySelector('audio');
+        audioElement.pause();
+        currentPlayingItem.innerHTML = currentOriginalHTML;
+        currentPlayingItem = null;
+      }
+      playlist.splice(index, 1);
+      localStorage.setItem('playlist', JSON.stringify(playlist));
+      loadMyPlaylist();
+    }
+  </script>
 </body>
 </html>
